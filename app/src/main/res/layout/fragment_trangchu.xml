@@ -21,7 +21,16 @@
             android:id="@+id/fragmentplaylist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
+        <fragment
+            android:name="com.example.my_amnhac.Fragment.Fragment_chudevatheloai"
+            android:id="@+id/fragmentchudevatheloai"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.my_amnhac.Fragment.Fragment_Album_Hot"
+            android:id="@+id/fragmentalbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </ScrollView>

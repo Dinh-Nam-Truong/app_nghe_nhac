@@ -1,5 +1,7 @@
 package com.example.my_amnhac.Service;
 
+import com.example.my_amnhac.Model.Album;
+import com.example.my_amnhac.Model.Chudevatheloai;
 import com.example.my_amnhac.Model.Playlist;
 import com.example.my_amnhac.Model.QuangCao;
 
@@ -15,4 +17,10 @@ public interface Data_service {
 
     @GET("playlistforcurentday.php")
     Call<List<Playlist>> GetPlaylistCurrentDay();
+
+    @GET("chudevatheloaitrongngay.php")
+    Call<Chudevatheloai> GetDataChuDeVaTheLoai();
+
+    @GET("albumhost.php")
+    Call<List<Album>> GetAlbumHot();
 }

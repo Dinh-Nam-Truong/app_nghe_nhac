@@ -5,13 +5,16 @@ import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.my_amnhac.Adapter.Album_Adapter;
 import com.example.my_amnhac.Model.Album;
 import com.example.my_amnhac.R;
 import com.example.my_amnhac.Service.API_service;
@@ -28,6 +31,8 @@ public class Fragment_Album_Hot extends Fragment {
     View view;
     RecyclerView recyclerView;
     TextView textxemthemalbum;
+    Album_Adapter album_adapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +50,11 @@ public class Fragment_Album_Hot extends Fragment {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 ArrayList<Album> albumArrayList = (ArrayList<Album>) response.body();
+                album_adapter = new Album_Adapter(getActivity(),albumArrayList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(album_adapter);
             }
 
             @Override

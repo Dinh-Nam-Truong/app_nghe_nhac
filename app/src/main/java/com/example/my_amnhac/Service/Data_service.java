@@ -1,6 +1,7 @@
 package com.example.my_amnhac.Service;
 
 import com.example.my_amnhac.Model.Album;
+import com.example.my_amnhac.Model.Baihat;
 import com.example.my_amnhac.Model.Chudevatheloai;
 import com.example.my_amnhac.Model.Playlist;
 import com.example.my_amnhac.Model.QuangCao;
@@ -23,4 +24,7 @@ public interface Data_service {
 
     @GET("albumhost.php")
     Call<List<Album>> GetAlbumHot();
+
+    @GET("baihatduocthich.php")
+    Call<List<Baihat>> GetBaiHatHot();
 }

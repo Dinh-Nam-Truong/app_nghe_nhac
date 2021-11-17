@@ -27,7 +27,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_below="@+id/relativealbum"
+            android:layout_below="@+id/textviewtitlealbum"
             android:id="@+id/recyclerviewalbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

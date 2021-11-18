@@ -1,6 +1,7 @@
 package com.example.my_amnhac.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Picture;
 import android.media.MediaDrm;
 import android.view.LayoutInflater;
@@ -8,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.my_amnhac.Activity.Danhsach_BaihatActivity;
 import com.example.my_amnhac.Model.QuangCao;
 import com.example.my_amnhac.R;
 import com.squareup.picasso.Picasso;
@@ -51,6 +54,14 @@ public class Banner_Adapter extends PagerAdapter {
         texttitlesongbanner.setText(arrayListbanner.get(position).getTenbaihat());
         textnoidung.setText(arrayListbanner.get(position).getNoidung());
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Danhsach_BaihatActivity.class);
+                intent.putExtra("banner",arrayListbanner.get(position));
+                context.startActivity(intent);
+            }
+        });
         container.addView(view);
         return view;
     }

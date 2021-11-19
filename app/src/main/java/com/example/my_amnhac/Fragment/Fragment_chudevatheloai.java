@@ -1,5 +1,6 @@
 package com.example.my_amnhac.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.my_amnhac.Activity.Danhsach_BaihatActivity;
+import com.example.my_amnhac.Activity.Danhsach_TatcachudeActivity;
 import com.example.my_amnhac.Model.Chude;
 import com.example.my_amnhac.Model.Chudevatheloai;
 import com.example.my_amnhac.Model.Theloai;
@@ -43,7 +46,14 @@ public class Fragment_chudevatheloai extends Fragment {
         view = inflater.inflate(R.layout.fragment_chudevatheloai,container,false);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollview);
         textxemthemchudetheloai = view.findViewById(R.id.textviewxemthem);
+        textxemthemchudetheloai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Danhsach_TatcachudeActivity.class);
+                startActivity(intent);
 
+            }
+        });
         GetData();
         return view;
     }
@@ -89,6 +99,15 @@ public class Fragment_chudevatheloai extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    int finalJ = j;
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), Danhsach_BaihatActivity.class);
+                            intent.putExtra("idtheloai",theloaiArrayList.get(finalJ));
+                            startActivity(intent);
+                        }
+                    });
                 }
                 horizontalScrollView.addView(linearLayout);
             }

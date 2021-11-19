@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import com.example.my_amnhac.Adapter.Danhsachbaihat_Adapter;
 import com.example.my_amnhac.Model.Baihat;
+import com.example.my_amnhac.Model.Playlist;
 import com.example.my_amnhac.Model.QuangCao;
+import com.example.my_amnhac.Model.Theloai;
 import com.example.my_amnhac.R;
 import com.example.my_amnhac.Service.API_service;
 import com.example.my_amnhac.Service.Data_service;
@@ -47,6 +49,8 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
     ImageView imgdanhsachcakhuc;
     ArrayList<Baihat> mangbaihat;
     Danhsachbaihat_Adapter danhsachbaihat_adapter;
+    Playlist playlist;
+    Theloai  theloai;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,52 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
             setValueInView(quangCao.getTenbaihat(),quangCao.getHinhbaihat());
             GetDataQuangcao(quangCao.getIdQuangCao());
         }
+        if (playlist != null && !playlist.getTen().equals("")){
+            setValueInView(playlist.getTen(),playlist.getHinh());
+            GetDataPlaylist(playlist.getIdplaylist());
+        }
+        if (theloai != null && !theloai.getTentheloai().equals("")){
+            setValueInView(theloai.getTentheloai(),theloai.getHinhtheloai());
+            GetDataTheloai(theloai.getIdtheloai());
+        }
+    }
+
+    private void GetDataTheloai(String idtheloai){
+        Data_service data_service = API_service.getService();
+        Call<List<Baihat>> callback = data_service.GetDanhsachbaihattheotheloai(idtheloai);
+        callback.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+                mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihat_adapter = new Danhsachbaihat_Adapter(Danhsach_BaihatActivity.this,mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(Danhsach_BaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihat_adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void GetDataPlaylist(String idplaylist) {
+        Data_service data_service = API_service.getService();
+        Call<List<Baihat>> callback = data_service.GetDanhsachbaihattheoplaylist(idplaylist);
+        callback.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+                mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihat_adapter = new Danhsachbaihat_Adapter(Danhsach_BaihatActivity.this,mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(Danhsach_BaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihat_adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void setValueInView(String ten, String hinh) {
@@ -124,7 +174,14 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
         if(intent != null){
             if (intent.hasExtra("banner")){
                 quangCao = (QuangCao) intent.getSerializableExtra("banner");
-                Toast.makeText(this,quangCao.getTenbaihat(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this,quangCao.getTenbaihat(),Toast.LENGTH_SHORT).show();
+            }
+            if (intent.hasExtra("itemplaylist")){
+                playlist = (Playlist) intent.getSerializableExtra("itemplaylist");
+//                Toast.makeText(this,playlist.getTen(),Toast.LENGTH_SHORT).show();
+            }
+            if (intent.hasExtra("idtheloai")){
+                theloai = (Theloai) intent.getSerializableExtra("idtheloai");
             }
         }
     }

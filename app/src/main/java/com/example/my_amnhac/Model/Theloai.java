@@ -4,8 +4,10 @@ package com.example.my_amnhac.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class Theloai {
+
+public class Theloai implements Serializable {
 
 @SerializedName("Idtheloai")
 @Expose

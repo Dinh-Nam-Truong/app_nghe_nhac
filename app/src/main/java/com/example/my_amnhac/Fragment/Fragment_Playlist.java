@@ -1,19 +1,24 @@
 package com.example.my_amnhac.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.my_amnhac.Activity.Danhsach_BaihatActivity;
+import com.example.my_amnhac.Activity.Danhsach_CacplaylistActivity;
 import com.example.my_amnhac.Adapter.Playlist_Adapter;
 import com.example.my_amnhac.Model.Playlist;
 import com.example.my_amnhac.R;
@@ -42,6 +47,13 @@ public class Fragment_Playlist extends Fragment {
         texttitleplaylist = view.findViewById(R.id.textviewtenplaylist);
         textxemthemplayist= view.findViewById(R.id.textviewviewmoreplaylist);
         GetData();
+        textxemthemplayist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Danhsach_CacplaylistActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -55,6 +67,14 @@ public class Fragment_Playlist extends Fragment {
                 playlist_adapter = new Playlist_Adapter(getActivity(), android.R.layout.simple_list_item_1,mangplaylist);
                 lvplaylist.setAdapter(playlist_adapter);
                 setListViewHeightBasedOnChildren(lvplaylist);
+                lvplaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(getActivity(), Danhsach_BaihatActivity.class);
+                        intent.putExtra("itemplaylist",mangplaylist.get(i));
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

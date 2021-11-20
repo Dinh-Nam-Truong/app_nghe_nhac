@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.my_amnhac.Activity.Danhsach_BaihatActivity;
 import com.example.my_amnhac.Activity.Danhsach_TatcachudeActivity;
+import com.example.my_amnhac.Activity.Danhsach_theloaitheochudeActivity;
 import com.example.my_amnhac.Model.Chude;
 import com.example.my_amnhac.Model.Chudevatheloai;
 import com.example.my_amnhac.Model.Theloai;
@@ -87,6 +88,15 @@ public class Fragment_chudevatheloai extends Fragment {
                     cardView.setLayoutParams(layout);
                     cardView.addView(imageView);
                     linearLayout.addView(cardView);
+                    int finalI = i;
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(getActivity(), Danhsach_theloaitheochudeActivity.class);
+                            intent.putExtra("chude",chudeArrayList.get(finalI));
+                            startActivity(intent);
+                        }
+                    });
                 }
                 for (int j=0; j<chudeArrayList.size(); j++){
                     CardView cardView = new CardView(getActivity());

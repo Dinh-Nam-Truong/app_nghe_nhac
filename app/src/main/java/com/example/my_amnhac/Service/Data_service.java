@@ -2,9 +2,11 @@ package com.example.my_amnhac.Service;
 
 import com.example.my_amnhac.Model.Album;
 import com.example.my_amnhac.Model.Baihat;
+import com.example.my_amnhac.Model.Chude;
 import com.example.my_amnhac.Model.Chudevatheloai;
 import com.example.my_amnhac.Model.Playlist;
 import com.example.my_amnhac.Model.QuangCao;
+import com.example.my_amnhac.Model.Theloai;
 
 import java.util.List;
 
@@ -45,4 +47,19 @@ public interface Data_service {
     @FormUrlEncoded
     @POST("danhsachbaihat.php")
     Call<List<Baihat>> GetDanhsachbaihattheotheloai(@Field("idtheloai") String idtheloai);
+
+    @GET("tatcachude.php")
+    Call<List<Chude>> GetAllchude();
+
+    @FormUrlEncoded
+    @POST("theloaitheochude.php")
+    Call<List<Theloai>> GetTheloaitheochude(@Field("idchude") String idchude);
+
+    @GET("tatcaalbum.php")
+    Call<List<Album>> GetAllalbum();
+
+    @FormUrlEncoded
+    @POST("danhsachbaihat.php")
+    Call<List<Baihat>> GetDanhsachbaihatthealbum(@Field("idalbum") String idalbum);
+
 }

@@ -3,7 +3,9 @@ package com.example.my_amnhac.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Chude {
+import java.io.Serializable;
+
+public class Chude implements Serializable {
 
 @SerializedName("Idchude")
 @Expose

@@ -27,6 +27,7 @@ public class Danhsach_CacplaylistActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerViewdanhsachcacplaylist;
     Danhsachcacplaylist_Adapter danhsachcacplaylist_adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

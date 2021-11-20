@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.My_amnhac">
         <activity
+            android:name=".Activity.Danhsach_tatcaalbumActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Danhsach_theloaitheochudeActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Danhsach_TatcachudeActivity"
             android:exported="true" />
         <activity

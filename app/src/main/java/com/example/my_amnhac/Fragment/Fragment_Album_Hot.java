@@ -1,5 +1,6 @@
 package com.example.my_amnhac.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.my_amnhac.Activity.Danhsach_tatcaalbumActivity;
 import com.example.my_amnhac.Adapter.Album_Adapter;
 import com.example.my_amnhac.Model.Album;
 import com.example.my_amnhac.R;
@@ -39,6 +41,13 @@ public class Fragment_Album_Hot extends Fragment {
         view = inflater.inflate(R.layout.fragment_album_hot,container,false);
         recyclerView = view.findViewById(R.id.recyclerviewalbum);
         textxemthemalbum = view.findViewById(R.id.textviewxenthemalbum);
+        textxemthemalbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Danhsach_tatcaalbumActivity.class);
+                startActivity(intent);
+            }
+        });
         GetData();  
         return view;
     }

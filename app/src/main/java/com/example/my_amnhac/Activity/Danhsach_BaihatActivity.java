@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.my_amnhac.Adapter.Danhsachbaihat_Adapter;
+import com.example.my_amnhac.Model.Album;
 import com.example.my_amnhac.Model.Baihat;
 import com.example.my_amnhac.Model.Playlist;
 import com.example.my_amnhac.Model.QuangCao;
@@ -51,6 +52,7 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
     Danhsachbaihat_Adapter danhsachbaihat_adapter;
     Playlist playlist;
     Theloai  theloai;
+    Album album;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,29 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
             setValueInView(theloai.getTentheloai(),theloai.getHinhtheloai());
             GetDataTheloai(theloai.getIdtheloai());
         }
+        if (album != null && !album.getTenalbum().equals("")){
+            setValueInView(album.getTenalbum(),album.getHinhalbum());
+            GetDataAlbum(album.getIdalbum());
+        }
+    }
+
+    private void GetDataAlbum(String idalbum) {
+        Data_service data_service = API_service.getService();
+        Call<List<Baihat>> callback = data_service.GetDanhsachbaihatthealbum(idalbum);
+        callback.enqueue(new Callback<List<Baihat>>() {
+            @Override
+            public void onResponse(Call<List<Baihat>> call, Response<List<Baihat>> response) {
+                mangbaihat = (ArrayList<Baihat>) response.body();
+                danhsachbaihat_adapter = new Danhsachbaihat_Adapter(Danhsach_BaihatActivity.this,mangbaihat);
+                recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(Danhsach_BaihatActivity.this));
+                recyclerViewdanhsachbaihat.setAdapter(danhsachbaihat_adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Baihat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void GetDataTheloai(String idtheloai){
@@ -182,6 +207,9 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
             }
             if (intent.hasExtra("idtheloai")){
                 theloai = (Theloai) intent.getSerializableExtra("idtheloai");
+            }
+            if (intent.hasExtra("album")){
+                album = (Album) intent.getSerializableExtra("album");
             }
         }
     }

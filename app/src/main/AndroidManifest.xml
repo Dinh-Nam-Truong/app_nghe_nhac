@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.My_amnhac">
         <activity
+            android:name=".Activity.PlayNhacActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.Danhsach_tatcaalbumActivity"
             android:exported="true" />
         <activity

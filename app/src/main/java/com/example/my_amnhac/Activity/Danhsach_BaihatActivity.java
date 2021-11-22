@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -58,6 +59,8 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsach_baihat);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         DataIntent();
         anhxa();
         init();
@@ -89,6 +92,7 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
                 danhsachbaihat_adapter = new Danhsachbaihat_Adapter(Danhsach_BaihatActivity.this,mangbaihat);
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(Danhsach_BaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihat_adapter);
+                eventClick();
             }
 
             @Override
@@ -108,6 +112,7 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
                 danhsachbaihat_adapter = new Danhsachbaihat_Adapter(Danhsach_BaihatActivity.this,mangbaihat);
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(Danhsach_BaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihat_adapter);
+                eventClick();
             }
 
             @Override
@@ -127,6 +132,7 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
                 danhsachbaihat_adapter = new Danhsachbaihat_Adapter(Danhsach_BaihatActivity.this,mangbaihat);
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(Danhsach_BaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihat_adapter);
+                eventClick();
             }
 
             @Override
@@ -162,6 +168,7 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
                 danhsachbaihat_adapter = new Danhsachbaihat_Adapter(Danhsach_BaihatActivity.this,mangbaihat);
                 recyclerViewdanhsachbaihat.setLayoutManager(new LinearLayoutManager(Danhsach_BaihatActivity.this));
                 recyclerViewdanhsachbaihat.setAdapter(danhsachbaihat_adapter);
+                eventClick();
             }
 
             @Override
@@ -182,7 +189,7 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
         });
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-
+        floatingActionButton.setEnabled(false);
     }
 
     private void anhxa() {
@@ -212,5 +219,16 @@ public class Danhsach_BaihatActivity extends AppCompatActivity {
                 album = (Album) intent.getSerializableExtra("album");
             }
         }
+    }
+    private void eventClick(){
+        floatingActionButton.setEnabled(true);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Danhsach_BaihatActivity.this,PlayNhacActivity.class);
+                intent.putExtra("caccakhuc",mangbaihat);
+                startActivity(intent);
+            }
+        });
     }
 }

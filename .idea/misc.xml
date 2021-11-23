@@ -21,6 +21,7 @@
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/dong_danhsachcacplaylist.xml" value="0.264" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/dong_playbaihat.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/dong_playlist.xml" value="0.264" />
+        <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/dong_seachbaihat.xml" value="0.12" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/dong_theloaitheochude.xml" value="0.2" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_album_hot.xml" value="0.2" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_baihat_duocyeuthich.xml" value="0.18070652173913043" />
@@ -29,8 +30,9 @@
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_dianhac.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_play_danhsachcacbaihat.xml" value="0.1634963768115942" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_playlist.xml" value="0.264" />
-        <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_timkiem.xml" value="0.11170212765957446" />
+        <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_timkiem.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/layout/fragment_trangchu.xml" value="0.1" />
+        <entry key="..\:/Users/ACER/Desktop/My_amnhac/app/src/main/res/menu/seach_view.xml" value="0.2296875" />
       </map>
     </option>
   </component>

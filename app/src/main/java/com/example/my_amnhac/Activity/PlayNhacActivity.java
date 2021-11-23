@@ -30,6 +30,7 @@ import com.example.my_amnhac.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PlayNhacActivity extends AppCompatActivity {
 
@@ -45,6 +46,11 @@ public class PlayNhacActivity extends AppCompatActivity {
     Fragment_Play_Danhsachcacbaihat fragment_play_danhsachcacbaihat;
 
     MediaPlayer mediaPlayer;
+
+    int position = 0;
+    boolean repeat = false;
+    boolean checkrandom = false;
+    boolean next = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,147 @@ public class PlayNhacActivity extends AppCompatActivity {
                         fragment_dianhac.objectAnimator.resume();
                     }
                 }
+            }
+        });
+        imgrepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (repeat == false){
+                    if (checkrandom == true){
+                        checkrandom = false;
+                        imgrepeat.setImageResource(R.drawable.iconsyned);
+                        imgrandom.setImageResource(R.drawable.iconsuffle);
+                    }
+                    imgrepeat.setImageResource(R.drawable.iconsyned);
+                    repeat = true;
+                }else {
+                    imgrepeat.setImageResource(R.drawable.iconrepeat);
+                    repeat = false;
+                }
+            }
+        });
+        imgrandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkrandom == false){
+                    if (repeat == true){
+                        repeat = false;
+                        imgrandom.setImageResource(R.drawable.iconshuffled);
+                        imgrepeat.setImageResource(R.drawable.iconrepeat);
+                    }
+                    imgrandom.setImageResource(R.drawable.iconshuffled);
+                    checkrandom = true;
+                }else {
+                    imgrandom.setImageResource(R.drawable.iconsuffle);
+                    checkrandom = false;
+                }
+            }
+        });
+        seekBarTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+            }
+        });
+        imgnext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mangbaihat.size() > 0){
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null){
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                    }
+                    if (position < (mangbaihat.size())){
+                        imgplay.setImageResource(R.drawable.iconpause);
+                        position++;
+                        if (repeat == true){
+                            if (position == 0){
+                                position = mangbaihat.size();
+                            }
+                            position -= 1;
+                        }
+                        if (checkrandom == true){
+                            Random random = new Random();
+                            int index = random.nextInt(mangbaihat.size());
+                            if (index == position){
+                                position = index - 1;
+                            }
+                            position = index;
+                        }
+                        if (position > (mangbaihat.size() - 1)){
+                            position = 0;
+                        }
+                        new PlayMp3().execute(mangbaihat.get(position).getLinkbaihat());
+                        fragment_dianhac.Playnhac(mangbaihat.get(position).getHinhbaihat());
+                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                        UpdateTime();
+                    }
+                }
+                imgpreview.setClickable(false);
+                imgnext.setClickable(false);
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgpreview.setClickable(true);
+                        imgnext.setClickable(true);
+                    }
+                },5000);
+            }
+        });
+        imgpreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mangbaihat.size() > 0){
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null){
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                    }
+                    if (position < (mangbaihat.size())){
+                        imgplay.setImageResource(R.drawable.iconpause);
+                        position--;
+                        if (position < 0){
+                            position = mangbaihat.size() - 1;
+                        }
+                        if (repeat == true){
+                            position += 1;
+                        }
+                        if (checkrandom == true){
+                            Random random = new Random();
+                            int index = random.nextInt(mangbaihat.size());
+                            if (index == position){
+                                position = index - 1;
+                            }
+                            position = index;
+                        }
+                        new PlayMp3().execute(mangbaihat.get(position).getLinkbaihat());
+                        fragment_dianhac.Playnhac(mangbaihat.get(position).getHinhbaihat());
+                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                        UpdateTime();
+                    }
+                }
+                imgpreview.setClickable(false);
+                imgnext.setClickable(false);
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgpreview.setClickable(true);
+                        imgnext.setClickable(true);
+                    }
+                },5000);
             }
         });
     }
@@ -173,6 +320,7 @@ public class PlayNhacActivity extends AppCompatActivity {
             }
             mediaPlayer.start();
             TimeSong();
+            UpdateTime();
         }
     }
 
@@ -181,5 +329,78 @@ public class PlayNhacActivity extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
         textTotaltimesong.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
         seekBarTime.setMax(mediaPlayer.getDuration());
+    }
+
+    private void UpdateTime(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mediaPlayer != null){
+                    seekBarTime.setProgress(mediaPlayer.getCurrentPosition());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                    textTimesong.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
+                    handler.postDelayed(this,300);
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            next = true;
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        },300);
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (next == true){
+                    if (position < (mangbaihat.size())){
+                        imgplay.setImageResource(R.drawable.iconpause);
+                        position++;
+                        if (repeat == true){
+                            if (position == 0){
+                                position = mangbaihat.size();
+                            }
+                            position -= 1;
+                        }
+                        if (checkrandom == true){
+                            Random random = new Random();
+                            int index = random.nextInt(mangbaihat.size());
+                            if (index == position){
+                                position = index - 1;
+                            }
+                            position = index;
+                        }
+                        if (position > (mangbaihat.size() - 1)){
+                            position = 0;
+                        }
+                        new PlayMp3().execute(mangbaihat.get(position).getLinkbaihat());
+                        fragment_dianhac.Playnhac(mangbaihat.get(position).getHinhbaihat());
+                        getSupportActionBar().setTitle(mangbaihat.get(position).getTenbaihat());
+                    }
+
+                    imgpreview.setClickable(false);
+                    imgnext.setClickable(false);
+                    Handler handler1 = new Handler();
+                    handler1.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            imgpreview.setClickable(true);
+                            imgnext.setClickable(true);
+                        }
+                    },5000);
+                    next = false;
+                    handler1.removeCallbacks(this);
+                }else {
+                    handler1.postDelayed(this,1000);
+                }
+            }
+        },1000);
     }
 }

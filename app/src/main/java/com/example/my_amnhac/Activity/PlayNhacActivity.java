@@ -334,6 +334,7 @@ public class PlayNhacActivity extends AppCompatActivity {
     private void UpdateTime(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void run() {
                 if (mediaPlayer != null){

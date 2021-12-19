@@ -64,13 +64,13 @@ public class Fragment_timkiem extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                SeachTukhoabaihat(query);
-                return true;
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                SeachTukhoabaihat(newText);
+                return true;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);

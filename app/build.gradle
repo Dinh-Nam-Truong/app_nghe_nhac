@@ -50,4 +50,5 @@ dependencies {
     implementation 'com.android.support:design:31.0.2'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:support-v4:31.1.0'
+    implementation 'androidx.media:media:1.2.0'
 }

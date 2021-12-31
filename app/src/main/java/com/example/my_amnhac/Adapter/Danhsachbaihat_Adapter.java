@@ -2,6 +2,7 @@ package com.example.my_amnhac.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.my_amnhac.Model.Baihat;
 import com.example.my_amnhac.R;
 import com.example.my_amnhac.Service.API_service;
 import com.example.my_amnhac.Service.Data_service;
+import com.example.my_amnhac.Service.MyService;
 
 import java.util.ArrayList;
 
